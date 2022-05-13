@@ -1,0 +1,12 @@
+<div class="order-container">
+	<p>
+		order works!
+	</p>
+	<div>
+		<div>
+			<ul *ngFor="let order of orders">
+				<li *ngIf="order.burger">Condiments: {{ order.burger.condiments }}</li>
+			</ul>
+		</div>
+	</div>
+</div>

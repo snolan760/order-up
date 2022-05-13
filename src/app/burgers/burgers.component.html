@@ -14,4 +14,9 @@
 	</ion-header>
 
 	<app-explore-container name="Burgers"></app-explore-container>
+	<div>
+		<button (click)="setOrder({})">set order</button>
+		<button (click)="checkOrders()">update orders</button>
+	</div>
+	<app-order [orders]="orders"></app-order>
 </ion-content>
