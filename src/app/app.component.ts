@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
-@Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-})
+import { Component, EventEmitter, Output } from '@angular/core'
+import { CartItemType, UserInterface } from './interfaces/GlobalTypes'
+import { CartService } from './cart.service'
+
+@Component( {
+	selector: 'app-root',
+	templateUrl: 'app.component.html',
+	styleUrls: [ 'app.component.scss' ],
+} )
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+	@Output() newCartItem = new EventEmitter<CartItemType>()
+	public cartItems: CartItemType[] = []
+	public menuItems = [
+		{ title: 'Meals', url: '/menu/meals', icon: 'mail' },
+		{ title: 'Sides', url: '/menu/sides', icon: 'paper-plane' }
+	];
+	public user: UserInterface
+
+	constructor(
+		private cartService: CartService
+	) {
+		this.cartItems = this.cartService.getItems()
+	}
 }
