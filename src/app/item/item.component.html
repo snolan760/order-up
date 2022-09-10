@@ -1,0 +1,19 @@
+<div>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{ item.name }}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			{{ item.description }}
+		</ion-card-content>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col *ngFor="let cat of item.categories">
+					<app-category [category]="cat" ></app-category>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</div>

@@ -1,0 +1,15 @@
+<ion-card>
+	<ion-card-header>
+		<ion-card-title>{{ category.name }}</ion-card-title>
+	</ion-card-header>
+
+	<ion-card-content>
+		category description
+		<app-additions
+			*ngFor="let addition of category.additions"
+			[addition]="addition"
+			(addAddition)="addAdditions($event)"
+		></app-additions>
+		<ion-button (click)="addToCategory(category)">add to cart</ion-button>
+	</ion-card-content>
+</ion-card>
