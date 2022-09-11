@@ -13,7 +13,7 @@ export class MenuPage implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log( 'this.activatedRoute.snapshot', this.activatedRoute.snapshot )
+		// console.log( 'this.activatedRoute.snapshot', this.activatedRoute.snapshot )
 		this.menu = this.activatedRoute.snapshot.paramMap.get( 'id' )
 	}
 }

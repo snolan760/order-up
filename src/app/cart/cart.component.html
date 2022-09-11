@@ -3,8 +3,8 @@
 	<ion-item *ngFor="let item of cartItems" lines="none" >
 		<ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
 		<ion-label>{{ item.name }} | ${{ item.price }}</ion-label>
-		<hr/>
-		<small *ngIf="item.additions.length">Additions: {{ additionsList(item.additions) }}</small>
+		<ion-note *ngIf="item.additions.length">Additions: {{ additionsList(item.additions) }}</ion-note>
+		<ion-icon (click)="removeItem(item)" name="trash-outline"></ion-icon>
 	</ion-item>
 </ion-list>
 <ion-list>

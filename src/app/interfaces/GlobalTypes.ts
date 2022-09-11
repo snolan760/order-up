@@ -20,6 +20,7 @@ export interface MealType {
 }
 
 export interface CartItemType {
+	id: string
 	name: string
 	price: number
 	additions?: AdditionsType[]

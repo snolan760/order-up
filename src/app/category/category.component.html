@@ -1,15 +1,19 @@
 <ion-card>
 	<ion-card-header>
-		<ion-card-title>{{ category.name }}</ion-card-title>
+		<ion-card-title *ngIf="cat.name">{{ cat.name }}</ion-card-title>
 	</ion-card-header>
 
 	<ion-card-content>
 		category description
-		<app-additions
-			*ngFor="let addition of category.additions"
-			[addition]="addition"
-			(addAddition)="addAdditions($event)"
-		></app-additions>
-		<ion-button (click)="addToCategory(category)">add to cart</ion-button>
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+			<app-additions
+				*ngFor="let addition of cat.additions"
+				[addition]="addition"
+				[addedToCart]="addedToCart"
+				(addAddition)="addAdditions($event)"
+			></app-additions>
+			<button>add to cart</button>
+<!--			<ion-button (click)="addToCategory(cat)">add to cart</ion-button>-->
+		</form>
 	</ion-card-content>
 </ion-card>

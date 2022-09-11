@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
+import { NgForm } from '@angular/forms'
 import { AdditionsType, CategoryType } from '../interfaces/GlobalTypes'
 import * as _ from 'lodash'
-import { CartService } from '../cart.service'
+import { CartService } from '../services/cart.service'
 
 @Component( {
 	selector: 'app-category',
@@ -10,8 +11,9 @@ import { CartService } from '../cart.service'
 } )
 export class CategoryComponent implements OnInit {
 	@Input() category: CategoryType
-	@Output() addToCart = new EventEmitter<CategoryType>()
 	public additions: AdditionsType[] = []
+	public cat: CategoryType
+	public addedToCart: boolean = false
 
 	constructor(
 		private cartService: CartService
@@ -19,6 +21,7 @@ export class CategoryComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.cat = _.cloneDeep( this.category )
 	}
 
 	addAdditions(additions: any) {
@@ -34,21 +37,26 @@ export class CategoryComponent implements OnInit {
 	}
 
 	addToCategory(category: any) {
-		const clonedCategory = _.cloneDeep( category )
-		clonedCategory.additions = this.additions
-		clonedCategory.price = clonedCategory.price + this.addCategoryAdditionPrices(clonedCategory)
-		console.log('clonedCategory', clonedCategory)
-		// @todo: use this:
-		this.cartService.updateItems( clonedCategory )
+		const clonedAdditions = _.cloneDeep( this.additions )
+		const clonedCategory = { ...category, additions: clonedAdditions }
+		clonedCategory.price = clonedCategory.price + this.addCategoryAdditionPrices( clonedCategory )
+		this.cartService.addItem( clonedCategory )
+		this.addedToCart = true
 	}
 
 	addCategoryAdditionPrices(category: any) {
 		let total = 0
-		if(category.additions.length) {
-			_.forEach(category.additions, res => {
+		if (category.additions.length) {
+			_.forEach( category.additions, res => {
 				total = total + res.price
-			})
+			} )
 		}
 		return total
+	}
+
+	onSubmit(f: NgForm) {
+		console.log('form f: ', f)
+		// console.log( f.value )
+		// console.log( f.valid )
 	}
 }

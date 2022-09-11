@@ -7,16 +7,13 @@
 					<ion-note>Hello, Taylor</ion-note>
 <!--					<ion-note>Hello, {{ user.name }}</ion-note>-->
 					<ion-menu-toggle auto-hide="false" *ngFor="let item of menuItems; let i = index">
-						<ion-item routerDirection="root" [routerLink]="[item.url]" lines="none" detail="false"
-								  routerLinkActive="selected">
-							<ion-icon slot="start" [ios]="item.icon + '-outline'"
-									  [md]="item.icon + '-sharp'"></ion-icon>
+						<ion-item routerDirection="root" [routerLink]="[item.url]" lines="none" detail="false" routerLinkActive="selected">
+							<ion-icon slot="start" [ios]="item.icon + '-outline'" [md]="item.icon + '-sharp'"></ion-icon>
 							<ion-label>{{ item.title }}</ion-label>
 						</ion-item>
 					</ion-menu-toggle>
 				</ion-list>
-
-				<app-cart [cartItems]="cartItems" ></app-cart>
+				<app-cart></app-cart>
 			</ion-content>
 		</ion-menu>
 		<ion-router-outlet id="main-content"></ion-router-outlet>

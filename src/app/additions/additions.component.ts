@@ -9,6 +9,7 @@ import * as _ from 'lodash'
 } )
 export class AdditionsComponent implements OnInit {
 	@Input() addition!: AdditionsType
+	@Input() addedToCart: boolean
 	@Output() addAddition = new EventEmitter<AdditionsType[]>()
 	public additions: AdditionsType[] = []
 
@@ -16,6 +17,10 @@ export class AdditionsComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log('addedToCart', this.addedToCart)
+		if(this.addedToCart) {
+			this.resetAdditions()
+		}
 	}
 
 	addAdditions(event: CustomEvent, value: any) {
@@ -24,5 +29,9 @@ export class AdditionsComponent implements OnInit {
 			const additionObj = { ...value, removeItem }
 			this.addAddition.emit( additionObj )
 		}
+	}
+
+	resetAdditions() {
+		// console.log('this.additions', this.additions)
 	}
 }

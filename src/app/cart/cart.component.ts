@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { CartItemType } from '../interfaces/GlobalTypes'
 import * as _ from 'lodash'
+import { CartService } from '../services/cart.service'
 
 @Component( {
 	selector: 'app-cart',
@@ -8,17 +9,22 @@ import * as _ from 'lodash'
 	styleUrls: [ './cart.component.scss' ]
 } )
 export class CartComponent implements OnInit {
-	@Input() cartItems!: CartItemType[]
+	public cartItems: CartItemType[]
 	public total: number = 0
 
-	constructor() {
+	constructor(
+		private cartService: CartService
+	) {
 	}
 
 	ngOnInit() {
+		this.cartItems = this.cartService.getItems()
+		console.log('this.cartItems', this.cartItems)
 	}
 
 	additionsList(additions: any) {
-		const tempAdditions = _.map( additions, res => res.name )
+		const clonedAdditions = _.cloneDeep(additions)
+		const tempAdditions = _.map( clonedAdditions, res => res.name )
 		return tempAdditions.join( ', ' )
 	}
 
@@ -30,6 +36,11 @@ export class CartComponent implements OnInit {
 			})
 		}
 		return total
+	}
+
+	removeItem(item: any) {
+		const clonedItem = _.cloneDeep(item)
+		return this.cartService.removeItem(clonedItem)
 	}
 
 }
