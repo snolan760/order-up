@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MealsService } from '../services/meals.service'
 import { CommonModule } from '@angular/common'
-import { CartItemType, MealType } from '../interfaces/GlobalTypes'
+import { MealType } from '../interfaces/GlobalTypes'
+import * as _ from 'lodash'
 
 @Component( {
 	selector: 'app-meals',
@@ -10,9 +11,8 @@ import { CartItemType, MealType } from '../interfaces/GlobalTypes'
 	imports: [ CommonModule ]
 } )
 export class MealsPage implements OnInit {
-	@Output() cartItems = new EventEmitter<CartItemType>()
-	@Output() newCartItem = new EventEmitter<CartItemType>()
 	public meals: MealType[]
+	public filterValue = ''
 
 	constructor(
 		private mealServices: MealsService
@@ -20,10 +20,17 @@ export class MealsPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.meals = this.getMeals()
+		this.getMeals()
 	}
 
 	getMeals() {
-		return this.mealServices.getMeals()
+		this.meals = this.mealServices.getMeals()
+	}
+
+	filterResults(event: any) {
+		const eventValue = event.detail.value
+		const filteredResults = _.filter( this.meals, { name: eventValue })
+		console.log( 'filteredResults', filteredResults )
+		this.meals = filteredResults
 	}
 }
