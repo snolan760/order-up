@@ -16,6 +16,7 @@ describe( 'CartComponent', () => {
 		fixture = TestBed.createComponent( CartComponent )
 		component = fixture.componentInstance
 		component.cartItems = [{
+			id: 1,
 			name: 'burger',
 			price: 12,
 			additions: [{

@@ -9,7 +9,7 @@ import { CartService } from '../services/cart.service'
 	styleUrls: [ './cart.component.scss' ]
 } )
 export class CartComponent implements OnInit {
-	public cartItems: CartItemType[]
+	public cartItems: CartItemType[] = []
 	public total: number = 0
 
 	constructor(
@@ -19,28 +19,27 @@ export class CartComponent implements OnInit {
 
 	ngOnInit() {
 		this.cartItems = this.cartService.getItems()
-		console.log('this.cartItems', this.cartItems)
 	}
 
 	additionsList(additions: any) {
-		const clonedAdditions = _.cloneDeep(additions)
+		const clonedAdditions = _.cloneDeep( additions )
 		const tempAdditions = _.map( clonedAdditions, res => res.name )
 		return tempAdditions.join( ', ' )
 	}
 
 	getTotal() {
 		let total = 0
-		if(this.cartItems.length) {
-			_.forEach(this.cartItems, res => {
+		if (this.cartItems.length) {
+			_.forEach( this.cartItems, res => {
 				total = total + res.price
-			})
+			} )
 		}
 		return total
 	}
 
 	removeItem(item: any) {
-		const clonedItem = _.cloneDeep(item)
-		return this.cartService.removeItem(clonedItem)
+		const clonedItem = _.cloneDeep( item )
+		return this.cartService.removeItem( clonedItem )
 	}
 
 }

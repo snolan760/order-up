@@ -6,7 +6,6 @@ import { MealsPageRoutingModule } from './meals-routing.module'
 import { MealsPage } from './meals.page'
 import { ItemComponent } from '../item/item.component'
 import { CategoryComponent } from '../category/category.component'
-import { AdditionsComponent } from '../additions/additions.component'
 
 @NgModule( {
 	imports: [
@@ -18,7 +17,7 @@ import { AdditionsComponent } from '../additions/additions.component'
 	exports: [
 		CategoryComponent
 	],
-	declarations: [ MealsPage, ItemComponent, CategoryComponent, AdditionsComponent ]
+	declarations: [ MealsPage, ItemComponent, CategoryComponent ]
 } )
 export class MealsPageModule {
 }

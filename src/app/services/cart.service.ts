@@ -14,14 +14,17 @@ export class CartService {
 
 	addItem(item: any) {
 		this.cartItems.push({ orderId: v4(), ...item })
+		localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
 	}
 
 	getItems() {
+		this.cartItems = JSON.parse( localStorage.getItem( 'cartItems' ) )
 		return this.cartItems
 	}
 
 	removeItem(item: any) {
 		_.remove(this.cartItems, { orderId: item.orderId})
+		localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
 		return this.cartItems
 	}
 }
