@@ -1,0 +1,14 @@
+<ion-list id="labels-list">
+	<ion-list-header>Cart</ion-list-header>
+	<ion-item *ngFor="let item of cartItems" lines="none" >
+		<ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+		<ion-label>{{ item.name }} | ${{ item.price }}</ion-label>
+		<hr/>
+		<small *ngIf="item.additions.length">Additions: {{ additionsList(item.additions) }}</small>
+	</ion-item>
+</ion-list>
+<ion-list>
+	<ion-item>
+		<ion-label>Total: {{ getTotal() }}</ion-label>
+	</ion-item>
+</ion-list>
