@@ -29,6 +29,7 @@ export class CartComponent implements OnInit {
 
 	getTotal() {
 		let total = 0
+		this.cartItems = this.cartService.getItems()
 		if (this.cartItems.length) {
 			_.forEach( this.cartItems, res => {
 				total = total + res.price
